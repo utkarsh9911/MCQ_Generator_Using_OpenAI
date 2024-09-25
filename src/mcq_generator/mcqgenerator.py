@@ -7,13 +7,23 @@ from src.mcq_generator.utils import read_file,get_table_data
 from src.mcq_generator.logger import logging
 
 #imporing necessary packages packages from langchain
-from langchain.chat_models import ChatOpenAI
-from langchain.prompts import PromptTemplate
+from langchain.llms import OpenAI
+# from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 from langchain.chains import SequentialChain
+# from langchain.callbacks import get_openai_callback
+
+# from langchain_openai import ChatOpenAI
+from langchain.prompts import PromptTemplate
+# from langchain_core import RunnableSequence
+
+from langchain_community.llms import OpenAI
+from langchain_community.chat_models import ChatOpenAI
 
 
-# Load environment variables from the .env file
+
+# Load environment variables from the .env filecls
+
 load_dotenv()
 
 # Access the environment variables just like you would with os.environ
@@ -40,7 +50,7 @@ quiz_generation_prompt = PromptTemplate(
     template=template)
 
 
-quiz_chain=LLMChain(llm=chatmodel,prompts=quiz_generation_prompt,output_key="quiz",verbose=True)
+quiz_chain=LLMChain(llm=chatmodel,prompt=quiz_generation_prompt,output_key="quiz",verbose=True)
 
 
 template2="""
